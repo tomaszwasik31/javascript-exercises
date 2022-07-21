@@ -1,23 +1,19 @@
 const findTheOldest = function (arr) {
   //no death date
 
-  const currentYear = new Date().getFullYear();
+  arr.map(function (person) {
+    if (!person.yearOfDeath) {
+      person.yearOfDeath = new Date().getFullYear();
+    } else {
+      return true;
+    }
+  });
 
- let hasDeathYear = arr.hasOwnProperty('yearOfDeath');
-
- if (hasDeathYear){
-    console.log('yes');
- }else{
-    console.log('no');
-    arr['yearOfDeath'] = currentYear;
- }
-
-  const oldestSorting = arr.sort(function (a, b) {
+  const oldestSorting = arr.sort((a, b) => {
     const lastPerson = a.yearOfDeath - a.yearOfBirth;
     const nextPerson = b.yearOfDeath - b.yearOfBirth;
     return lastPerson > nextPerson ? -1 : 1;
   });
-  console.log(oldestSorting);
   return oldestSorting[0];
 };
 
